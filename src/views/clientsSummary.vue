@@ -3,7 +3,6 @@
     <v-row>
       <v-col cols="2">
         <v-card>
-          <!-- color="#385F73" dark -->
           <v-card-title class="text-h5">
             {{ gym.activeGym.count }}
           </v-card-title>
@@ -23,15 +22,11 @@
             :nonActiveClients="numberNonActiveClients"
             @saveIndexChartDough="saveIndexChartDough($event)"
           />
-          <!--<v-card-subtitle>Doughnut chart</v-card-subtitle>-->
-
           <v-card-actions>
-            <!--<v-btn text> chart </v-btn>-->
           </v-card-actions>
         </v-card>
       </v-col>
-      <!--<v-card class="pa-2" outlined tile>-->
-      <!--<v-card>-->
+
       <v-col cols="6">
         <v-card>
           <!-- color="white" -->
@@ -60,11 +55,9 @@
             />
             <v-spacer> </v-spacer>
           </div>
-          <!--<v-card-subtitle> Bar chart </v-card-subtitle> -->
 
           <v-card-actions>
-            <!--<v-btn text> Bar chart </v-btn>-->
-          </v-card-actions>
+        </v-card-actions>
         </v-card>
       </v-col>
     </v-row>
@@ -72,8 +65,7 @@
 </template>
 
 <script>
-//import { Bar, } from "vue-chartjs/legacy";
-//import { Doughnut } from 'vue-chartjs'
+
 import { Bar } from "vue-chartjs/legacy";
 
 import chartDoughnut from "../views/mainBody/chartDoughnut";
@@ -127,7 +119,6 @@ export default {
     nonActiveClients: null,
   },
   data: () => ({
-    //filterName: [{text: "filtersLabels.gender"}, {text:"filtersLabels.age"}],
     filterName: [
       {text:"gender", value:"gender"}, 
       {text:"age", value:"age"}
@@ -148,19 +139,7 @@ export default {
         },
       ],
     },
-    // chartOptions: {
-    //   responsive: true,
-    //   scales: {
-    //     x: {
-    //        grid: { display: false,
-    //           borderColor: "grey" },
-    //     },
-    //     y: {
-    //        grid: { display: false,
-    //           borderColor: "grey" },
-    //     },
-    //   },
-    // },
+
   }),
   computed: {
     gym() {

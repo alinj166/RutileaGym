@@ -2,7 +2,7 @@
   <v-container fluid>
     <h1>{{ $t("settingsView.settings") }}</h1>
     <!-- Settings -->
-    <!-- max-width="400" class="mx-auto" -->
+
     
 
     <v-card class="mx-auto pa-5 ma-10" max-width="800" tile elevation="2">
@@ -34,9 +34,7 @@
           </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
-      <!--<v-card-actions>
-    <ChooseLanguage/>
-    </v-card-actions>-->
+
     </v-card>
 
     <v-row align="center" v-bind:class="{ sensorOption: !formDisplay }">
@@ -71,8 +69,7 @@
 </template>
 
 <script>
-//import { mapActions } from "vuex";
-//import { getAPI } from "../axios-api";
+
 import { mapState } from "vuex";
 import ChooseLanguage from "../components/ChooseLanguage";
 export default {
@@ -87,8 +84,7 @@ export default {
         password: "",
       },
       settingItems: [
-        //:label="`Checkbox 1: ${checkbox.toString()}`"
-        { label: this.$i18n.t(`settingsView.name`), value: "Admin" }, //label:Name //label: this.i18n.$t('settingsView.name')
+        { label: this.$i18n.t(`settingsView.name`), value: "Admin" },
         {
           label: this.$i18n.t("settingsView.mailAddress"),
           value: "admin@example.com",
@@ -110,93 +106,20 @@ export default {
   },
   computed: {
     changeDefaultDate() {
-      //return this.$store.state.auth.dates
       return this.$store.state.dates;
     },
     changeSelectedDate() {
-      //return this.$store.state.auth.selectedDateFormat
       return this.$store.state.selectedDateFormat;
     },
     ...mapState(["APISettings"]),
   },
   mounted() {
-   // console.log("lang", this.$i18n.messages);
-  //  this.changeSelectedDatee();
-    //this.getReportsData();
-    //console.log(username)
-    //this.test = this.$store.dispatch('changeLoading')
-    //console.log("changeLoading", this.changeLoading)
-    //console.log("users", this.$store.state.auth.users)
+  
   },
   created() {
-    // Fetch tasks on page load
-    //this.getData();
-    //this.getReportsData();
-  },
+     },
   methods: {
-    /*async getReportsData() {
-      //, { headers: { Authorization: `Bearer ${this.$store.state.accessToken}` } }
-      getAPI
-        .get("/api/users/user/", {
-          headers: { Authorization: `Bearer ${this.$store.state.accessToken}` },
-        })
-        .then((response) => {
-          this.$store.state.APISettings = response.data;
-          console.log(this.$store.state.APISettings);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },*/
-    /*async getData() {
-                try {
-                  
-                    // fetch tasks
-                    const response = await this.$http.get('http://localhost:8000/api/building/');
-                    // set the data returned as tasks
-                    console.log(response)
-                    this.buildings = response.data; 
-                } catch (error) {
-                    // log the error
-                    console.log(error);
-                }
-            },*/
-
-    //...mapGetters({ Dates: "changeDefaultDate" }),
-    // ...mapActions(["LogIn"]),
-    // async submit() {
-    //   const User = new FormData();
-    //   User.append("username", this.form.username);
-    //   User.append("password", this.form.password);
-    //   console.log(User.get("password"),"dad");
-    //   let t = await this.LogIn(User);
-    //   console.log(t);
-    //   if (t) {
-    //     this.$router.push("/");
-    //     this.showError = false;
-    //   } else this.showError = true;
-
-    //   /*try {
-    //     await this.LogIn(User);
-    //       this.$router.push("/");
-    //       this.showError = false
-    //   } catch (error) {
-    //      this.showError = true
-    //   }*/
-    // },
-
-    /*changeLoading() {
-      this.$store.dispatch('changeLoading')
-      console.log(this.$store.state.test)
-    },*/
-
- /*   changeSelectedDatee() {
-      //this.$store.state.auth.selectedDateFormat = this.selectedDate;
-      //console.log(this.$store.state.auth.selectedDateFormat);
-
-      this.$store.state.selectedDateFormat = this.selectedDate;
-      console.log(this.$store.state.selectedDateFormat);
-    },*/
+   
   },
 };
 </script>

@@ -48,16 +48,7 @@
             <v-card-text>
               <v-container>
                 <v-row>
-                  <!--<v-col
-                      cols="12"
-                      sm="6"
-                      md="4"
-                  >
-                    <v-text-field
-                        v-model="editInterventions.name"
-                        :label="$t('logDisplay.interventionID')"
-                    ></v-text-field>
-                  </v-col>-->
+         
                   <v-col
                       cols="12"
                       sm="6"
@@ -119,18 +110,6 @@
                         label="date"
                     ></v-text-field>
                   </v-col>
-
-                  <!--<v-col
-                      cols="12"
-                      sm="6"
-                      md="4"
-                  >
-                    <v-text-field
-                        v-model="interComments"
-                        :label="$t('logDisplay.condition')"
-                    ></v-text-field>
-                  </v-col>-->
-                  
                   <v-col
                       cols="12"
                       sm="6"
@@ -295,8 +274,7 @@ export default {
     this.getInterventions()
   },
   mounted() {
-    //console.log("localstorage",localStorage)
-    //console.log("mapstateee",this.APIData)
+   
     this.getInterventions()
   },
   computed: {
@@ -305,96 +283,9 @@ export default {
      },
     ...mapState(['APIData']),
   },
-  //  computed: {
-  //    mapState(){
-  //     return this.$store.state.interventions 
-  //    },
-  //    formTitle () {
-  //      return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
-  //    },
-  // },
+
   methods: {
-    initialize () {
-      //this.interventions = this.interventions 
-      //this.interventions = ['']
-        /*{
-          name: 'ID01',
-          calories: 'Wafa',
-          fat: 'Check', //fat: 'Check',
-          carbs: 'Intervention due to bad response',
-          protein: 'In progress',
-          uploadFile:'sensorSound.mp3'
-        },
-        {
-          name: 'ID02',
-          calories: 'Wafa',
-          fat: 'Change Sensor',
-          carbs: 'Incompatibility',
-          protein: 'Suspended',
-          uploadFile:'sensorImage.png'
-        },
-        {
-          name: 'ID03',
-          calories: 'Wafa',
-          fat: 'Change Battery',
-          carbs: 'Problem of sensor',
-          protein: 'Closed',
-          uploadFile:'sensorImage.png'
-        },
-        {
-          name: 'ID03',
-          calories: 'Wafa',
-          fat: '',
-          carbs: 'Motor Issue',
-          protein: 'To do ',
-          uploadFile:'reports.pdf'
-        },
-        {
-          name: 'ID04',
-          calories: 'Wafa',
-          fat: '',
-          carbs: 'High Vibration',
-          protein: 'In progress',
-          uploadFile:'sensorVideo.mp4'
-        },
-        {
-          name: 'ID05',
-          calories: 'Wafa',
-          fat: '',
-          carbs: 'Conflicting',
-          protein: 'Closed',
-          uploadFile:'reports.pdf'
-        },*/
-        /*{
-          name: 'Lollipop',
-          calories: 392,
-          fat: 0.2,
-          carbs: 98,
-          protein: 0,
-        },
-        {
-          name: 'Honeycomb',
-          calories: 408,
-          fat: 3.2,
-          carbs: 87,
-          protein: 6.5,
-        },
-        {
-          name: 'Donut',
-          calories: 452,
-          fat: 25.0,
-          carbs: 51,
-          protein: 4.9,
-        },
-        {
-          name: 'KitKat',
-          calories: 518,
-          fat: 26.0,
-          carbs: 65,
-          protein: 7,
-        },*/
-      
-    },
+   
     editItem (item) {
       this.editedIndex = this.interventions.indexOf(item)
       this.editInterventions = Object.assign({}, item)
@@ -448,10 +339,7 @@ export default {
     },
     async submitForm(){
     try {
-        // Send a POST request to the API
-        // const headers = headers :{
-        //   'accept':'application/json',
-        //   'Authorization': 'Bearer 24f13e2c51adf19e640fe870df276ceab61629c0'}
+
         const response = await getAPI.post('/api/interventions/',
           
           {interDescription: this.interDescription,
@@ -463,22 +351,7 @@ export default {
           interDate: this.interDate,
           },
           { headers: { Authorization: `Bearer ${this.$store.state.accessToken}` }})
-        // const response = await this.$http.post('http://localhost:8000/api/interventions/',
-        
-        //  {
-        //   interDescription: this.interDescription,
-        //   interByUser: this.interByUser,
-        //   interType: this.interType,
-        //   interComments: this.interComments,
-        //   interStatus: this.interStatus,
-        //   interUploads: this.interUploads,
-        //   interDate: this.interDate,
-        // },
-        /*{headers :{
-          'accept':'application/json',
-          'Authorization': 'Bearer 24f13e2c51adf19e640fe870df276ceab61629c0'}}*////);
-        /*this.editInterventions.push(this.interDescription, this.interByUser, this.interType, 
-        this.interComments, this.interStatus, this.interUploads, this.interDate)*/
+      
         Object.assign(this.interventions[this.editedIndex], this.editInterventions)
         // Append the returned data to the tasks array
         this.interventions.push(response.data);
@@ -499,17 +372,7 @@ export default {
           .catch(err => {
             console.log(err)
           })
-      // try {
-        
-      //   const response = await this.$http.get('http://localhost:8000/api/interventions/');
-      //   console.log(response)
-      //     this.interventions = response.data;
-      //     //console.log(this.interventions[0].interComments = "orange")
-          
-      //     } catch (error) {
-      //       // log the error
-      //       console.log(error);
-      //     }
+   
       }
   },
 }

@@ -94,6 +94,7 @@ export default {
     activeClients: {
       
       handler () {
+        console.log("here")
         this.$data.chartData.datasets[0].data = [this.activeClients.count,this.nonActiveClients.count];
         
       }

@@ -1,16 +1,9 @@
 import api from "../../api";
-
-///import changeClientsRisksToQuitMutation from "./dashMutation";
-//import changeFilterdClientsRisksToQuitMutation from "./dashMutation";
-
 //filterd Clients Risk to quit used in Dashboard Page (table) and the same array of objects  used as init to generate filterdClientsRisksToQuit
 //to display chart on dashboard
 const changeClientsRisksToQuit = (context, gymId) => {
   return new Promise((resolve, reject) => {
-    /*const timeout = setTimeout(() => {
-        
-        // Timeout Logic
-      }, 10000);*/
+
 
 
     api
@@ -109,25 +102,6 @@ const changeFilterdClientsRisksToQuit = (context, filter) => {
     context.commit("changeFilterdClientsRisksToQuitMutation", data);
   });
 
-  /*let map = table[0].reduce((prev, cur) => {
-      let temp = cur[table[1]];
-      console.log("🚀 ~ file: store.js ~ line 250 ~ map ~ temp", temp);
-      prev[temp] = (prev[temp] || 0) + 1;
-      return prev;
-    }, {});
-    let labels = [];
-    let dataSets = [];
-    for (let i in map) {
-      labels.push(i);
-      dataSets.push(map[i]);
-    }
-    console.log(labels, map, dataSets);
-    context.commit("changeFilterdClientsRisksToQuit", {
-      labels: labels,
-      datasets: [
-        { data: dataSets, label: table[1], backgroundColor: ["#ADD6FF"] },
-      ],
-    });*/
 };
 
 ///information used on card (dashboard page)

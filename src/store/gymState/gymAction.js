@@ -2,10 +2,7 @@ import api from "../../api";
 
 const changeClientsSummary = (context, id) => {
   return new Promise((resolve, reject) => {
-    /*const timeout = setTimeout(() => {
-        
-        // Timeout Logic
-      }, 10000);*/
+
     api
       .clientsSummary(id)
       .then((response) => {
@@ -93,13 +90,11 @@ const changeActiveIndexDoughnut = (context, filtre) => {
               })
               .then(() => {
                 activeAge.map((item) => {
-                  // labels.push(item.age);
-                  //data.push(item.count);
+     
                   data[item.age - 1] = item.count;
                 });
                 NonActiveAge.map((item) => {
-                  // labels.push(item.age);
-                  // data1.push(item.count);
+          
                   data1[item.age - 1] = item.count;
                 });
                 datasets = [
@@ -115,7 +110,6 @@ const changeActiveIndexDoughnut = (context, filtre) => {
                   },
                 ];
                 chartData = { datasets: datasets, labels: labels };
-                //chartData["label"] = "age";
                 context.commit("changeActiveIndexDoughnutMutation", chartData);
               });
           });
@@ -128,10 +122,7 @@ const changeActiveIndexDoughnut = (context, filtre) => {
 
 const changeNumberNonActiveClients = (context, id) => {
   return new Promise((resolve, reject) => {
-    /*const timeout = setTimeout(() => {
-      
-      // Timeout Logic
-    }, 10000);*/
+
     api
       .numberActiveClients()
       .then((response) => {
@@ -148,10 +139,7 @@ const changeNumberNonActiveClients = (context, id) => {
 };
 const changeNumberActiveClients = (context, id) => {
   return new Promise((resolve, reject) => {
-    /*const timeout = setTimeout(() => {
-      
-      // Timeout Logic
-    }, 10000);*/
+
     api
       .numberNonActiveClients()
       .then((response) => {

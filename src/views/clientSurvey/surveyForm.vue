@@ -2,11 +2,9 @@
     <v-container fluid>
       <!-- fill-height -->
       <h1 class="mb-4"> {{ $t("surveyForm.ClientSurvey") }}</h1>
-      <!-- <h1 class="mb-4">{{ $t("manageItems.addGym.manageGyms") }}</h1> -->
       <v-layout align-center justify-center>
         <v-flex xs12 sm8 md8>
           <!-- <v-row> -->
-            <!-- <v-col cols="12"> -->
               <v-card class="elevation-12">
                 <v-layout justify-center>
                   <span
@@ -14,7 +12,6 @@
                     class="my-4 text--lighten-5 text-center"
                   >
                   {{ $t("surveyForm.userExperience") }}
-                    <!-- {{ $t("manageItems.addGym.addNewGym") }} -->
           
                   </span>
                 </v-layout>
@@ -43,7 +40,7 @@
                       name="clientEmail"
                       :label="$t('surveyForm.emailUser')"
                       type="text"
-                      v-model="form.clientEmail"
+                      v-model="userCardActiveRowTableCRQ.user_email"
                       :rules="[rules.required]"
                       v-on:click="createStatus = false"
                       disabled
@@ -98,9 +95,6 @@
                       prepend-icon="mdi-dumbbell"
                       
                     ></v-combobox>
-                    <!-- :rules="[rules.required]" -->
-                <!-- :label="`Checkbox 1: ${checkbox1.toString()}`" 
-                :label="`Checkbox 2: ${checkbox2.toString()}`"-->
                     <v-checkbox
                         v-model="surveyCheckbox"
                         :label="$t('surveyForm.clientContact')"
@@ -121,16 +115,7 @@
                         :label="$t('surveyForm.surveySent')"
                         value=4
                         ></v-checkbox>
-  
-                    <!-- <v-dialog v-model="dialog">
-                      <v-lazy>
-                        <CreateGymsMap
-                          :markers="markers"
-                          @update-marker="updateMarker($event, markers)"
-                        />
-                      </v-lazy>
-                    </v-dialog> -->
-                    <v-row>
+                      <v-row>
                       <v-col cols="6">
                         <v-dialog v-model="dialog" max-width="800px">
                           <template v-slot:activator="{ on, attrs }">
@@ -170,11 +155,6 @@
                   </v-form>
                 </v-card-text>
               </v-card>
-            <!-- </v-col> -->
-            <!-- <v-col cols="6">
-              <fileUpload />
-            </v-col> -->
-          <!-- </v-row> -->
         </v-flex>
       </v-layout>
   
@@ -187,14 +167,6 @@
         <v-progress-circular :size="70" :width="7" color="purple" indeterminate>
         </v-progress-circular>
       </v-overlay>
-      <!-- <template>
-        <v-data-table
-          :headers="headers"
-          :items="testClaims"
-          :items-per-page="5"
-          class="elevation-1"
-        ></v-data-table>
-      </template> -->
       <h1 class="my-8">{{$t('surveyForm.SurveyHistory')}}</h1>
       <v-card
         flat
@@ -210,9 +182,6 @@
           <v-flex xs4 sm4 md2>
             <div class="grey--text">{{$t('surveyForm.note')}}</div>
           </v-flex>
-          <!-- <v-flex xs4 sm4 md1  >
-            <div class="caption black--text">{{$t('surveyForm.claim')}}</div>
-          </v-flex> -->
           <v-flex  xs4 sm4 md2 >
             <div class="grey--text">
               {{$t('surveyForm.facilitiesMaintenance')}}</div>
@@ -235,83 +204,37 @@
         :key="i"
         class="mb-4 px-4 elevation-1"
       >
-      <!-- <v-divider class="mx-8"></v-divider> -->
-      <!-- <v-card
-        flat
-        class="mb-1 px-4 elevation-12"> -->
-      
         <v-layout row wrap >   <!--:class="`pa-3 project ${claim.id_claim}`"-->
-          <!-- <v-flex xs12 md2>
-            <div class="caption grey--text">{{$t('dashboardView.logDisplay.membershipID')}}</div>
-            <div>{{ userCardActiveRowTableCRQ.membership_id }}</div>
-          </v-flex> -->
           <v-flex xs4 sm4 md1>
-            <!-- <div class="caption grey--text">{{$t('surveyForm.client_id')}}</div> -->
             <div>{{ userCardActiveRowTableCRQ.membership_id}}</div>
           </v-flex>
-          <!-- <v-divider vertical class="my-4"></v-divider> -->
           <v-flex xs4 sm4 md2>
-            <!-- <div class="caption grey--text">{{$t('surveyForm.email')}}</div> -->
             <div>{{ claim.admin_email}}</div>
           </v-flex>
           <v-flex xs4 sm4 md2>
-            <!-- <div class="caption grey--text">{{$t('surveyForm.note')}}</div> -->
             <div>{{ claim.claim_text }}</div>
           </v-flex>
-          <!-- <v-flex xs4 sm4 md1>
-            <div class="caption grey--text">{{$t('surveyForm.claim')}}</div> 
-            <div>{{ claim.id_claim}}</div>
-          </v-flex>-->
           <v-flex  xs4 sm4 md2 >
-            <!-- <div class="caption grey--text">
-              {{$t('surveyForm.facilitiesMaintenance')}}</div> -->
             <div v-for="(facility, i) in claim.id_facility" :key="i" >{{ dict[facility] +',' }}</div>
           </v-flex>
           <v-flex  xs4 sm4 md3 >
-            <!-- <div class="caption grey--text">
-              {{$t('surveyForm.retention')}}</div> -->
             <div  v-for="(id_retention, i) in claim.id_retention" :key="i" >{{ surveyCheckboxdict[id_retention] +',' }}</div>
           </v-flex>
-          <!-- style="display: inline" -->
           <v-flex  xs4 sm4 md2 >
-            <!-- <div class="caption grey--text">
-              {{$t('surveyForm.claimDate')}}</div> -->
               <div>{{ claim.claim_date.split('T')[0]}}</div>
               <div>{{ claim.claim_date.split('T')[1].split(".")[0]}}</div>
           </v-flex>
-          <!-- <v-flex xs6 sm1 md1>
-            <div class="caption grey--text">{{$t('surveyForm.clientContact')}}</div>
-            <div><v-icon> mdi-download-outline </v-icon></div>
-          </v-flex>
-          <v-flex xs6 sm1 md1>
-            <div class="caption grey--text">{{$t('surveyForm.meeting')}}</div>
-            <div><v-icon> mdi-trash-can-outline </v-icon></div>
-          </v-flex>
-          <v-flex xs6 sm1 md1>
-            <div class="caption grey--text">{{$t('surveyForm.offer')}}</div>
-            <div><v-icon> mdi-trash-can-outline </v-icon></div>
-          </v-flex>
-          <v-flex xs6 sm1 md1>
-            <div class="caption grey--text">{{$t('surveyForm.surveySent')}}</div>
-            <div><v-icon> mdi-trash-can-outline </v-icon></div>
-          </v-flex> -->
-          <!-- <v-divider class="mx-6"></v-divider> -->
+
         </v-layout>
       </v-card>
     </v-container>
   </template>
   
   <script>
-  ///                     v-on:click="dialog = true"
   import { validationMixin } from "vuelidate";
   import { required, maxLength, email } from "vuelidate/lib/validators";
-  //import fileUpload from "../fileUpload/fileUpload";
-  //import CreateGymsMap from "../../components/createGymsMap.vue";
   import api from "../../api";
-  //import { mapState } from 'vuex'
-  //import { Axios } from '../axios-api'
-  // let test = {"id_claim":[], "client_id":[],"claim_text":[],"member_email":[], "admin_name":[],
-  //            "Claims_has_Facilites":[], "Claims_has_Retention_Action":[]}
+
 
   export default {
     mixins: [validationMixin],
@@ -331,8 +254,7 @@
     data: () => ({
       dialog: false,
       fileUpload: [],
-      // testClaims : {"id_claim":[], "client_id":[],"claim_text":[],"member_email":[], "admin_name":[],
-      //        "Claims_has_Facilites":[], "Claims_has_Retention_Action":[]},
+   
       testClaims : [],
       test: [],
       createStatus: false,
@@ -340,7 +262,7 @@
       createType: undefined,
       form: {
         membership_id: "",
-        clientEmail: "example@gmail.com",
+        clientEmail: "",
         username: "",
         bio: "",
         userEmail:"",
@@ -370,20 +292,7 @@
         }
       },
       select: ["Vuetify", "Programming"],
-      /*items: ["athelic", "pool", "bade_pool",
-      "studio_1","studio_2","multipurpose_studio",
-      "multipurpose_studio","jacuzzi","massage",
-      "outside_air_bath_jacuzzi","sleeping_bath",
-      "utase_hot_water","steam_sauna","mist_sauna",
-      "dry_sauna","shower_booth","water_bath","open_air_bath","mutlipupose_court"
-      ,"tennis_court","golf_range","squash_coat","massage_chair"
-      ],*/
-      /*surveyCheckbox: [
-      { text: "client first contact", value: "client_first_contact", id:1 },
-      { text: "client act", value: "one_to_one_meeting", id:2 },
-      { text: "client first contact", value: "a_special_offer_made_to_the_client", id:3 },
-      { text: "client first contact", value: "client_satisfaction_survey_sent", id:4 },
-    ],*/
+   
     surveyCheckboxdict:{ "1": "client's first contact",
       "2": "One to one meeting",
       "3": "Special offer made to the client",
@@ -422,7 +331,6 @@
       { text: "Studio 1", value: "studio_1", id:4 },
       { text: "Studio 2", value: "studio_2", id:5 },
       { text: "Multipurpose Studio", value: "multipurpose_studio", id:6 },
-      // { text: "Multipurpose Studio", value: "multipurpose_studio" },
       { text: "Jacuzzi", value: "jacuzzi", id:7 },
       { text: "Massage", value: "massage", id:8 },
       { text: "Outside Air", value: "outside_air_bath_jacuzzi", id:9 },
@@ -485,7 +393,6 @@
         !this.$v.email.required && errors.push("E-mail is required");
         return errors;
       },
-      //...mapState(['APIDataset', 'APIData']),
 
       headers() {
       return [
@@ -527,9 +434,7 @@
           value: "claim_date",
           width: "30%",
         },
-        // { text: 'Actions', value: 'actions', sortable: false },
-        /*{ text: 'Protein (g)', value: 'protein' },
-          { text: 'Iron (%)', value: 'iron' },*/
+
       ];
     },
     },
@@ -564,10 +469,7 @@
             surveyTest.push(Number(element))
           });
           payload["actions_list"] = surveyTest
-  
-          //payload["facilities_list"] = [1,2,3],
-          //payload["actions_list"] = [5,6],
-          payload["admin_name"] = this.form.username, // "salah",
+          payload["admin_name"] = this.form.username, // "name",
           payload["claim_text"] = this.form.bio, //"yes",
           payload["member_email"] = this.form.clientEmail, // "zzz@gmail.com" ,
           payload["admin_email"] = this.form.userEmail, // "eee@gmail.com"
@@ -608,29 +510,19 @@
           }, 4000);
   
         }
-        // api
-        //     .get_claim(this.userCardActiveRowTableCRQ.client_id)
-        //     .then(response => {
-        //       this.$store.APIData = response.data
-        //     })
         
       },
       async getReportsData() {
-        //let adminName = []
-        // let test = {"id_claim":[], "client_id":[],"claim_text":[],"member_email":[], "admin_name":[],
-        //      "Claims_has_Facilites":[], "Claims_has_Retention_Action":[]}
+
         this.testClaims.length = 0
-        //this.test.length = 0
       api.get_claim(this.$route.params.id)
           .then(response => {
             this.$store.state.APIData = response.data
             
-            //dict[1]
             
             this.$store.state.APIData.map((e)=> {
 
               let t = {}
-              //this.testClaims = []
               t["client_id"] = e.client_id
               t["admin_name"] = e.admin_name
               t["admin_email"] = e.admin_email

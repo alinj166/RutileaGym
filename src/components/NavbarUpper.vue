@@ -1,11 +1,12 @@
 <template>
 
-<v-toolbar-items >
-   <v-btn text router  :to="'/dashboard/'+ activeGym.id">
+<v-toolbar-items > 
+
+   <v-btn text router  :to="'/dashboard/'+ this.activeGym.id">
                 <span>{{ $t("navbar.dashboard") }}</span> <!-- home -->
                 <!--<v-icon right> home </v-icon>-->
              </v-btn>
-             <v-btn text router :to="'/gym/'+ activeGym.id">
+             <v-btn text router :to="'/gym/'+ this.activeGym.id">
                 <span>{{ $t("navbar.gym") }}</span> <!-- home -->
                 <!--<v-icon right> home </v-icon>-->
              </v-btn>
@@ -15,26 +16,21 @@
         
 </template>
 <script>
-//import Popup from './Popup.vue'
 
 
 export default {
-  
+
    data: () => ({
+    
       drawer: true,
       navbarMenu : [
-        //this.i18n.$t('navbar.comparison')
         {icon: 'compare', text:"navbar.comparison",route: '/comparison'},
         {icon: 'mdi-sitemap-outline', text:"navbar.manageItems",route: '/manageItems/0'},
         {icon: 'report', text:"navbar.reports",route: '/projects'},
         {icon: 'settings', text:"navbar.settings",route: '/settings'},
       ],
       links :[
-          /*{icon: 'dashboard', text:'Dashboard', route: '/'},
-          {icon: 'folder', text:'My Project', route: '/projects'},
-          {icon: 'person', text:'Team', route: '/team'},
-          {icon: 'show_chart', text:'Charts', route: '/chart'},
-          {icon: 'supervision', text:'Supervision', route: '/supervision'},*/
+        
           {icon: 'leak_add', color: 'red', text:'1', route: '/chart'},
           {icon: 'leak_add', color: 'orange', text:'2', route: '/chartSensor2'},
       ],
@@ -46,20 +42,16 @@ export default {
       ],
      linksMenu :[
        {icon: 'home', text:'Home', route: '/homePage'},
-       //{icon: 'folder', text:'Reports', route: '/projects'},
        {icon: 'show_chart', text:'Charts', route: '/chart'},
        {icon: 'supervision', text:'Supervision', route: '/supervision'},
        {icon: 'person', text:'Devices', route: '/devices'},
-       //{icon: 'leak_add', text:'comparison', route: '/comparison'},
-       /*{icon: 'person', text:'Devices', route: '/team'},*/
-       /*{icon: 'dashboard', text:'Dashboard', route: '/'},*/
+
      ],
      items: [
        {title: 'Pref 1', 
         icon: 'mdi-home-city', 
        },
        { title: 'Pref 2', icon: 'mdi-account' },
-       //{ title: 'Factory C', icon: 'mdi-account-group-outline' },
      ],
      admins: [
        ['City 1', 'mdi-leak'],
@@ -157,10 +149,7 @@ export default {
       ],
      
     }),
-    components: {
-      //ChooseLanguage,
-    //Popup
-  },
+
 
   mounted() {
   },

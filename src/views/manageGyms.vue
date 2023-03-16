@@ -195,38 +195,8 @@ export default {
       }
     },
     select: ["Vuetify", "Programming"],
-    /*items: ["athelic", "pool", "bade_pool",
-    "studio_1","studio_2","multipurpose_studio",
-    "multipurpose_studio","jacuzzi","massage",
-    "outside_air_bath_jacuzzi","sleeping_bath",
-    "utase_hot_water","steam_sauna","mist_sauna",
-    "dry_sauna","shower_booth","water_bath","open_air_bath","mutlipupose_court"
-    ,"tennis_court","golf_range","squash_coat","massage_chair"
-    ],*/
+   
     items: [
-      { text: "Athelic", value: "athelic" },
-      { text: "Pool", value: "pool" },
-      { text: "Bade Pool", value: "bade_pool" },
-      { text: "Studio 1", value: "studio_1" },
-      { text: "Studio 2", value: "studio_2" },
-      { text: "Multipurpose Studio", value: "multipurpose_studio" },
-      { text: "Multipurpose Studio", value: "multipurpose_studio" },
-      { text: "Jacuzzi", value: "jacuzzi" },
-      { text: "Massage", value: "massage" },
-      { text: "Outside Air", value: "outside_air_bath_jacuzzi" },
-      { text: "Sleeping Bath", value: "sleeping_bath" },
-      { text: "Utase Hot", value: "utase_hot_water" },
-      { text: "Steam Sauna", value: "steam_sauna" },
-      { text: "Mist Sauna", value: "mist_sauna" },
-      { text: "Dry Sauna", value: "dry_sauna" },
-      { text: "Shower Booth", value: "shower_booth" },
-      { text: "Water Bath", value: "water_bath" },
-      { text: "Open Air", value: "open_air_bath" },
-      { text: "Mutlipupose Court", value: "mutlipupose_court" },
-      { text: "Tennis Court", value: "tennis_court" },
-      { text: "Golf Range", value: "golf_range" },
-      { text: "Squash Coat", value: "squash_coat" },
-      { text: "Massage Chair", value: "massage_chair" },
     ],
     markers: [],
 

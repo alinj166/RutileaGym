@@ -18,8 +18,7 @@
             class="inputdate text-no-wrap rounded dateInput ms-n2"
             style="margin-top: 10px; padding-top: 5px; height: 40px"
           >
-            <!--<b-form-datepicker id="example-datepicker" v-model="value" class="mb-2"></b-form-datepicker>-->
-            <!--<input @change="filterData()" type="date" id="startdate" value='2021-01-01'>-->
+  
             <input
               type="datetime-local"
               @change="filterData()"
@@ -64,11 +63,6 @@
             </v-btn>
           </v-col>
           <v-col class="mt-2" cols="12" md="8">
-            <!-- <v-col class="mt-2" cols="14" md="24"> -->
-            <!--<line-chart/>-->
-            <!--<LineChartVue id="chartId" :data="dataLine" :options="options"/>
-            <line-chart id="chartIdLine" :chart-options="options"
-            -->
             <line-chart
               :chart-options="options"
               :chart-data="dataLine"

@@ -1,15 +1,13 @@
 <template>
   <v-container fluid color="#fafafa" light>
   <h1> {{$t('comparison.gymComparison')}} </h1>
-  <!--<div class="text-h5 text-grey ">
-      Gym Comparison
-    </div>-->
+
     <Bar 
     :chart-options="chartOptions"
     :chart-data="chartData"
     :chart-id="chartId"
     :dataset-id-key="datasetIdKey"
-    :plugins="options.plugins.title"
+    :plugins="plugins"
     :css-classes="cssClasses"
     :styles="styles"
     :width="width"
@@ -179,53 +177,10 @@ export default {
     }],
     },
     
-      /*options:{
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          zoom: {
-            zoom: {
-              wheel: {
-                enabled: true,
-              },
-              pinch: {
-                enabled: true
-              },
-              mode: 'x',
-            },
-            pan: {
-              enabled: true,
-              threshold: 0.08,
-              borderColor: "#c45850"
-            }
-          },
-          title: {
-            display: true,
-            text: ' Number of clients ',
-            font: {size: 20},
-            //color: 'black',
-            padding: {
-                    top: 10,
-                    bottom: 30
-                }
-          }
-      },
-      },*/
     filterName: [{text:"filtersLabels.all",value: "all"}, {text:"Only Active",value: "Only_active"},{ text:"Only Non Active",value:"Only_Non_active"}],
     select: "all",
   }),
-  /*mounted() {
-    console.log("vuetify", this.$vuetify.theme.isDark)
-    
-    if (this.$vuetify.theme.isDark) {
-      this.chartOptions.plugins.legend.labels.color = "white"
-      //this.options.plugins.legend.labels.color = "white"
-    }
-    else 
-      this.chartOptions.plugins.legend.labels.color = "black"
-      //this.options.plugins.legend.labels.color = "black"
-  },*/
- computed: {
+  computed: {
     gym() {
       return this.$store.state.activeGym;
     },
@@ -239,7 +194,6 @@ export default {
         legend: {
         labels: {
           color: (this.$vuetify.theme.isDark) ? "white" : "black",  // not 'fontColor:' anymore
-          // fontSize: 18  // not 'fontSize:' anymore
           font: {
             size: 12 // 'size' now within object 'font {}'
           }

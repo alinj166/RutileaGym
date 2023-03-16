@@ -3,17 +3,12 @@
     <!--<v-app-bar  color="#fafafa" light app >-->
     <v-app-bar color="header" app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <!--{{drawer}}-->
       <v-toolbar-title class="text-uppercase">
         
       </v-toolbar-title>
 
-      <NavbarUpper v-show="stateNavBar"> </NavbarUpper>
-      <!-- <v-spacer></v-spacer>
-      <v-btn text @click="logout()">
-        <span class=""> {{ $t("navbar.logout") }}</span> 
-        <!-<v-icon right>exit_to_app</v-icon> ->
-      </v-btn> -->
+      <NavbarUpper v-show="stateNavBar" > </NavbarUpper>
+
       
     </v-app-bar>
 
@@ -79,47 +74,7 @@
         </v-list-item>
       </div>
 
-      <!--
-        <v-list-group
-            :value="true"
-            prepend-icon="mdi-map-marker-radius-outline"
-            color="white"
-        >
-          <template v-slot:activator>
-            <v-list-item-title> {{$t('navbar.factoryAcity')}} </v-list-item-title>
-          </template>
-  
-      <v-list-group
-        v-for="item in itemsCityPref2"
-        :key="item.title"
-        v-model="item.active"
-        no-action
-        sub-group
-        prepend-icon="mdi-city-variant-outline"
-      >
-        <template v-slot:activator>
-          <v-list-item-content>
-            <v-list-item-title v-text="item.title"></v-list-item-title>
-          </v-list-item-content>
-        </template>
-
-        <v-list-item
-          v-for="child in item.items"
-          :key="child.title"
-          router :to="child.route"
-          @click="displayMenu" 
-        >
-        <v-list-item-icon>
-            <v-icon>mdi-weight-lifter</v-icon>
-          </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title v-text="child.title"></v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list-group>
-
-        </v-list-group>-->
-      <!--<v-spacer class="pt-16 pb-16 mb-16 "></v-spacer>-->
+     
       <template v-slot:append>
         <div class="pa-2">
           <v-spacer></v-spacer>
@@ -145,37 +100,28 @@
   </nav>
 </template>
 <script>
-//import Popup from './Popup.vue'
 
 import NavbarUpper from "./NavbarUpper.vue";
 import api from "../api";
 export default {
-  /*props: {
-    drawer: Boolean
-  },*/
+
 
   data: () => ({
     gyms: null,
-
+    temp:{},
     drawer: true,
     isVisible: false,
     navbarMenu: [
-      //this.i18n.$t('navbar.comparison')
       { icon: "compare", text: "navbar.comparison", route: "/comparison" },
       {
         icon: "mdi-sitemap-outline",
         text: "navbar.manageItems",
         route: "/manageGyms",
       },
-      //{icon: 'report', text:"navbar.reports",route: '/projects'},
       { icon: "settings", text: "navbar.settings", route: "/settings" },
     ],
     links: [
-      /*{icon: 'dashboard', text:'Dashboard', route: '/'},
-          {icon: 'folder', text:'My Project', route: '/projects'},
-          {icon: 'person', text:'Team', route: '/team'},
-          {icon: 'show_chart', text:'Charts', route: '/chart'},
-          {icon: 'supervision', text:'Supervision', route: '/supervision'},*/
+     
       { icon: "leak_add", color: "red", text: "1", route: "/chart" },
       { icon: "leak_add", color: "orange", text: "2", route: "/chartSensor2" },
     ],
@@ -197,18 +143,14 @@ export default {
     ],
     linksMenu: [
       { icon: "home", text: "Home", route: "/homePage" },
-      //{icon: 'folder', text:'Reports', route: '/projects'},
       { icon: "show_chart", text: "Charts", route: "/chart" },
       { icon: "supervision", text: "Supervision", route: "/supervision" },
       { icon: "person", text: "Devices", route: "/devices" },
-      //{icon: 'leak_add', text:'comparison', route: '/comparison'},
-      /*{icon: 'person', text:'Devices', route: '/team'},*/
-      /*{icon: 'dashboard', text:'Dashboard', route: '/'},*/
+
     ],
     items: [
       { title: "Pref 1", icon: "mdi-home-city" },
       { title: "Pref 2", icon: "mdi-account" },
-      //{ title: 'Factory C', icon: 'mdi-account-group-outline' },
     ],
     admins: [
       ["City 1", "mdi-leak"],
@@ -305,15 +247,9 @@ export default {
   }),
   components: {
     NavbarUpper,
-    //ChooseLanguage,
-    //Popup
+
   },
 
-  /*computed: {
-  gymRoutes() {
-     return this.$route.name === 'Login'
-  }
-},*/
 mounted(){
 },
   computed: {
@@ -351,10 +287,7 @@ mounted(){
   
     displayMenu(index) {
       this.url_data = this.$route.params.id;
-
-      //let routes = ["gym"]
-      //if (routes.includes(this.$route.name)) {
-      if (this.$route.name !== "dashboard") {
+      if (this.url_data === undefined) {
         this.isVisible = false;
         this.$store.dispatch("changeStateNavBar", false);
       
@@ -364,14 +297,13 @@ mounted(){
         this.$store.dispatch("changeNumberNonActiveClients", index);
         this.$store.dispatch("changeClientsSummary", index);
         this.$store.dispatch("changeNumberActiveClients", index);
-        let temp = {
+         this.temp = {
           activeGym: this.gyms.find((i) => i.gym_id === index),
           id: index,
         };
-        this.$store.dispatch("changeActiveGym", temp);
+        this.$store.dispatch("changeActiveGym", this.temp);
       }
     },
-    //...mapActions(["LogOut"]),
    
   },
 };

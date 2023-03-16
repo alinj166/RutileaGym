@@ -107,30 +107,7 @@
           </v-card>
           <v-divider class="mx-8"></v-divider>
         </v-col>
-        
-<!--
-    <v-card-text>
-      <v-row align="center" class="mx-0 justify-center pa-2">
-        <v-rating
-          :value="4.5"
-          color="amber"
-          dense
-          half-increments
-          readonly
-          size="14"
-        ></v-rating>
 
-        <div class="grey--text ms-4">
-          {{ $t("dashboardView.userCard.address") }}
-        </div>
-      </v-row>
-
-    <div class="my-4 text-subtitle-1 justify-center">
-        User Settings
-      </div>-->
-
-      <!--<div class="my-4">Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.</div>
-    </v-card-text>-->
     <v-divider class="mx-4"></v-divider>
     <v-container v-for="align in alignments" :key="align" class="mb-16">
       <div>
@@ -147,35 +124,19 @@
               >
                 {{ $t("filtersLabels.gender") }}
               </div>
-              <!--<v-card-subtitle> 男性 </v-card-subtitle>-->
               <div>{{ userCardActiveRowTableCRQ.gender }}</div>
             </v-card-text>
           </v-card>
-          <!-- <v-divider class="mx-4"></v-divider>-->
-          <!--<v-card
-            class="pa-2"
-            outlined
-            tile
-          >
-            One of three columns
-          </v-card>-->
+
         </v-col>
         <v-col key="age" class="my-4">
           <v-card class="pb-6 px-10 lighten-5 text-center" tile>
             <v-card-text>
               <div>{{ $t("filtersLabels.age") }}</div>
-              <!--<v-card-subtitle> 男性 </v-card-subtitle>-->
               <div>{{ userCardActiveRowTableCRQ.age }}</div>
             </v-card-text>
           </v-card>
-          <!-- <v-divider class="mx-4"></v-divider> -->
-          <!--<v-card
-            class="pa-2"
-            outlined
-            tile
-          >
-            One of three columns
-          </v-card>-->
+      
         </v-col>
 
         <v-col key="operations">
@@ -187,17 +148,14 @@
               >
                 {{ $t("dashboardView.userCard.operations") }}
               </div>
-              <!--<v-card-subtitle> 男性 </v-card-subtitle>-->
               <div>{{cum_visits }}</div>
             </v-card-text>
           </v-card>
-          <!--<v-divider class="mx-4"></v-divider>-->
         </v-col>
         <v-col key="score">
           <v-card class="pb-6 px-10 text-center" tile>
             <v-card-text>
               <div>{{ $t("dashboardView.userCard.score") }}</div>
-              <!--<v-card-subtitle> 男性 </v-card-subtitle>-->
               <div>{{ userCardActiveRowTableCRQ.score }}</div>
             </v-card-text>
           </v-card>
@@ -208,7 +166,6 @@
           <v-card class="pb-6 px-11 text-center" tile>
             <v-card-text>
               <div>{{ $t("filtersLabels.phone") }}</div>
-              <!--<v-card-subtitle> 男性 </v-card-subtitle>-->
               <div>{{ userCardActiveRowTableCRQ.user_phone }}</div>
             </v-card-text>
             <v-dialog v-model="dialogUpdatePhone" width="500">
@@ -220,6 +177,9 @@
               </template>
 
               <v-card>
+                <v-form
+    ref="form"
+    v-model="validPhone"  @submit.prevent="updatePhone">
                 <v-card-title class="text-h5 grey lighten-2">
                   {{ $t("filtersLabels.warning") }}
                 </v-card-title>
@@ -228,18 +188,13 @@
                   <v-container>
                     <v-row>
                       <v-col >
-                        <v-form
-    ref="form"
-    v-model="validPhone"
-   
-  >
+
                         <v-text-field
                           v-model="number_phone"
                           :label="$t('filtersLabels.newPhone')"
                           
                           :rules="phoneRules"
                         ></v-text-field>
-                        </v-form>
                       </v-col>
                     </v-row>
                   </v-container>
@@ -250,11 +205,13 @@
                 <v-card-actions>
                   <v-spacer></v-spacer>
 
-                  <v-btn color="primary"  :disabled="!validPhone"  text @click="updatePhone">{{ $t("filtersLabels.yes") }} </v-btn>
-                  <v-btn color="primary" text @click="dialogUpdatePhone = false">
+                  <v-btn color="primary"  :disabled="!validPhone"  type="submit" text >{{ $t("filtersLabels.yes") }} </v-btn>
+                  <v-btn color="primary" text v-on:click="closePhoneDialog">
                     {{ $t("filtersLabels.no") }}
                   </v-btn>
                 </v-card-actions>
+              </v-form>
+
               </v-card>
             </v-dialog>
             
@@ -296,7 +253,6 @@
           <v-card class="pb-6 px-11 text-center" tile>
             <v-card-text>
               <div>{{ $t("filtersLabels.email") }}</div>
-              <!--<v-card-subtitle> 男性 </v-card-subtitle>-->
               <div>{{ userCardActiveRowTableCRQ.user_email }}</div>
             </v-card-text>
 
@@ -309,6 +265,11 @@
               </template>
 
               <v-card>
+                <v-form
+    ref="form"
+    v-model="valid"
+    @submit.prevent="updateEmail"
+  >
                 <v-card-title class="text-h5 grey lighten-2">
                   {{ $t("filtersLabels.warning") }} 
                 </v-card-title>
@@ -317,18 +278,13 @@
                   <v-container>
                     <v-row>
                       <v-col >
-                        <v-form
-    ref="form"
-    v-model="valid"
-   
-  >
+
                         <v-text-field
                           :rules="emailRules"
                           v-model="editEmail"
+                      
                           :label=" $t('filtersLabels.newEmail')"
-                         
                         ></v-text-field>
-                        </v-form>
                       </v-col>
                     </v-row>
                   </v-container>
@@ -339,12 +295,14 @@
                 <v-card-actions>
                   <v-spacer></v-spacer>
 
-                  <v-btn :disabled="!valid" color="primary" text @click="updateEmail">{{ $t("filtersLabels.yes") }} </v-btn>
-                  <v-btn color="primary" text @click="dialogUpdateEmail = false">
+                  <v-btn :disabled="!valid" color="primary" text type="submit">{{ $t("filtersLabels.yes") }} </v-btn>
+                  <v-btn color="primary" text v-on:click="closeEmailDialog">
                     {{ $t("filtersLabels.no") }}
 
                   </v-btn>
                 </v-card-actions>
+              </v-form>
+
               </v-card>
             </v-dialog>
             <v-dialog v-model="dialogResetEmail" width="500">
@@ -382,9 +340,6 @@
       </v-row>
     </v-container>
 
-    <!--<v-divider class="mx-4"></v-divider>-->
-
-
     <v-row style="padding-top: 30%">
         <v-col >
 
@@ -401,12 +356,7 @@
       <v-chip
         >{{ $t("dashboardView.userCard.lastVisitDate") }}
         {{ userCardActiveRowTableCRQ["last_visit_date"] }}</v-chip
-      
         >
-
-      <!--<v-chip>8:00PM</v-chip>
-
-    <v-chip>9:00PM</v-chip>-->
     </v-chip-group>
   </v-card-text>
 </v-card-actions>
@@ -473,6 +423,26 @@ export default {
 
   methods: {
 
+    closePhoneDialog(){
+      this.dialogUpdatePhone = false ;
+
+      if (this.userCardActiveRowTableCRQ.user_phone=="undefined" || this.userCardActiveRowTableCRQ.user_phone==""|| this.userCardActiveRowTableCRQ.user_phone==undefined)
+          {this.number_phone="";
+        }
+          else {
+          this.number_phone=this.userCardActiveRowTableCRQ.user_phone  //"undefined";
+                   }      
+    },
+    closeEmailDialog(){
+      this.dialogUpdateEmail = false ;
+      if (this.userCardActiveRowTableCRQ.user_email=="undefined" || this.userCardActiveRowTableCRQ.user_email==""|| this.userCardActiveRowTableCRQ.user_email==undefined)
+          { this.editEmail = "";
+        }
+          else {
+          this.editEmail=this.userCardActiveRowTableCRQ.user_email  //"undefined";
+                   }
+      
+    },
     handleFileUpload(event){
         if (this.file !== null && this.file !== "") {
           this.file = event;
@@ -696,15 +666,21 @@ export default {
 
       userCardActiveRowTableCRQ: {
         handler() {
-          if (this.userCardActiveRowTableCRQ.user_phone=="undefined" &&this.userCardActiveRowTableCRQ.user_email=="undefined")
+  
+
+        if (this.userCardActiveRowTableCRQ.user_email=="undefined" || this.userCardActiveRowTableCRQ.user_email==""|| this.userCardActiveRowTableCRQ.user_email==undefined)
+          { this.editEmail = "";
+        }
+          else {
+          this.editEmail=this.userCardActiveRowTableCRQ.user_email  //"undefined";
+                   }
+
+          if (this.userCardActiveRowTableCRQ.user_phone=="undefined" || this.userCardActiveRowTableCRQ.user_phone==""|| this.userCardActiveRowTableCRQ.user_phone==undefined)
           {this.number_phone="";
-          this.editEmail ='';
         }
           else {
           this.number_phone=this.userCardActiveRowTableCRQ.user_phone  //"undefined";
-         
-            this.editEmail = this.userCardActiveRowTableCRQ.user_email;
-          }
+                   }
           }
         
       },  

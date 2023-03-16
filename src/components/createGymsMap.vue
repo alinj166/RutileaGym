@@ -30,15 +30,6 @@ import { LMap, LTileLayer, LMarker, LTooltip } from "vue2-leaflet";
 import { OpenStreetMapProvider } from "leaflet-geosearch";
 import LGeosearch from "vue2-leaflet-geosearch";
 
-/*import  L  from 'leaflet';
-import "leaflet/dist/leaflet.css";
-delete L.Icon.Default.prototype._getIconUrl;
-
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
-  iconUrl: require('leaflet/dist/images/marker-icon.png'),
-  shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
-});*/
 export default {
   name: "CreateGymsMap",
   components: {

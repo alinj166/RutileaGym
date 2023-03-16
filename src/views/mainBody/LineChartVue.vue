@@ -2,9 +2,7 @@
 
 import zoomPlugin from 'chartjs-plugin-zoom';
 import { Line } from 'vue-chartjs/legacy'
-//import colors from 'vuetify/lib/util/colors'
-//import chartsDisplay from "./chartDisplay";
-//import navbar from "./Navbar.";
+
 import vuetify from '../../plugins/vuetify';
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, LineElement, PointElement } from 'chart.js'
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, LineElement, PointElement, zoomPlugin)
@@ -50,8 +48,7 @@ export default {
   labelsDate,
   data() {
     return {
-      //labelsDate: ['2022-01-01','2022-02-01'],
-      //username: 'username',
+  
       labelsSecond,
       labelsDate,
     }
@@ -68,7 +65,6 @@ export default {
     this.velocity()
     this.render
     this.renderChart(this.data, this.options),
-      //console.log("here")
       
     console.log("velocity from mounted", this.velocityArr)
     console.log("velocity 1", this.velocityArr[1])
@@ -77,8 +73,7 @@ export default {
   },
   methods: {
     velocity() {
-      //var m = [5.279541016e-002,2.593994141e-002]
-      //var velocityArr = []
+
       Math.integral = function (a) {
 
         var y, result = 0;
@@ -95,12 +90,10 @@ export default {
         var x = Math.integral(dataValue[j])
         this.velocityArr.push(x)
 
-        //console.log('Integral', x)
       }
 
-      console.log('velocityArr', this.velocityArr)
-      /*Using the sample*/
-      // console.log( Math.integral(a[0],a[1]) );
+
+
     }
   },
 };

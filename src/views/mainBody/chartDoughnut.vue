@@ -142,6 +142,7 @@ export default {
   watch: {
     activeClients: {
       handler() {
+        console.log("here");
         this.$data.chartData.datasets[0].data = [
           this.activeClients.count,
           this.nonActiveClients.count,
@@ -159,9 +160,9 @@ export default {
     updateChart() {
       this.$data.chartData.set_datasets();
     },
-    // switchActive() {
-    //   console.log("chart clicked");
-    // },
+    switchActive() {
+      console.log("chart clicked");
+    },
   },
 };
 </script>

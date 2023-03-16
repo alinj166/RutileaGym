@@ -67,7 +67,6 @@ export default {
             x: [
               {
                 stacked: true,
-                // gridLines: { display: true }
               }
             ],
             y: [

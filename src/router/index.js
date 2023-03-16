@@ -27,16 +27,9 @@ const routes = [
     path: '/',
     name: 'empty',
     component: HomePage,
-    ///meta: { requiresAuth: true },
   },
 
 
-  /*{
-    path: '/building',
-    name: 'building',
-    component: building,
-    //meta: { requiresAuth: false },
-  },*/
   {
     path: '/homePage',
     name: 'Home',

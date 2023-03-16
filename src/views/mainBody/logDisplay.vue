@@ -8,7 +8,6 @@
     class="elevation-1"
     :value="selectedItemState"
     @click:row="rowClick"
-    single-select="true"
 
     :footer-props="{
       itemsPerPageOptions:[5,10,50]
@@ -52,34 +51,10 @@
           <button type="button" class="btn btn-success" @click="exportToExcel()">{{$t("dashboardView.logDisplay.export")}} .xls</button>
         </download-excel></v-list-item-title>
         </v-list-item>
-        <!-- <v-list-item
-          v-for="item in exportOptions"
-          :key="item"
-          link
-        > 
-          <v-list-item-title v-text="item.text" @click="item.text === 'Export to xls' ? exportToExcel() : exportToPDF(headers, clientsRisksToQuit) "></v-list-item-title>
-        </v-list-item> -->
+   
       </v-list>
     </v-menu>
-        <!-- <v-btn
-          @click="exportToPDF(headers, clientsRisksToQuit)"
-          elevation="2"
-          small
-          class="mb-2"
-        >
-          Export
-        </v-btn>
-        <download-excel 
-        :data="clientsRisksToQuit"
-        :fields="json_fields"
-        :header="header"
-        :footer="footer"
-        :name="fileName"
-        :worksheet="worksheet"
-        >
-          <button type="button" class="btn btn-success" @click="exportToExcel()">Download Excel</button>
-        </download-excel> -->
-      </v-toolbar>
+         </v-toolbar>
     </template>
     <template v-slot:item.actions="{ item }">
       <v-icon
@@ -110,22 +85,8 @@ export default {
         { id: 3, name: 'Bob', age: 40, city: 'Chicago' },
       ],
 
-      singleSelect: false,
       selected: [],
-      /*headers: [
-          {
-            text: 'dashboardView.logDisplay.membershipID',
-            align: 'start',
-            sortable: false,
-            value: 'client_id',
-            width: "20%"
-          },
-          { text: 'dashboardView.logDisplay.currentAge', value: 'age', width: "20%"},
-          { text: 'dashboardView.logDisplay.gender', value: 'gender', width: "20%"},
-          { text: 'dashboardView.logDisplay.score', value: 'score', width: "40%"},
-          //{ text: 'Protein (g)', value: 'protein' },
-          //{ text: 'Iron (%)', value: 'iron' },
-        ],*/
+   
       json_data: [
         {
           name: "naveen"
@@ -137,7 +98,6 @@ export default {
       "Gender":"gender",
       "Score %":"score",
       "Date Enrollment":"DateEnrollment",
-      //'gym Label': 'gym_label'
       },
       header:"" ,
       footer:"",
@@ -150,16 +110,6 @@ export default {
     };
   },
 
-  mounted() {
-
-    const selectedItemState = sessionStorage.getItem('selectedItem');
-    if (selectedItemState) {
-      this.selectedItemState.push (JSON.parse(selectedItemState));
-    }
-    else 
-   this.selectedItemState.push(this.clientsRisksToQuitsorted[0]) 
-
-  },
 
   computed: {
    
@@ -210,8 +160,6 @@ export default {
           , sortable: false
         },
         { text: this.$t("dashboardView.logDisplay.Action"), value: 'actions', sortable: false },
-        /*{ text: 'Protein (g)', value: 'protein' },
-          { text: 'Iron (%)', value: 'iron' },*/
       ];
     },
   },
@@ -223,14 +171,27 @@ export default {
 
     clientsRisksToQuit: {
   handler() {
-    this.selectedItemState=[]
-    const selectedItemState = sessionStorage.getItem('selectedItem');
+
+    if (!sessionStorage.getItem('clientSurvey'))
+  {  sessionStorage.removeItem('selectedItem');
+this.selectedItemState=[] 
+this.selectedItemState.push(this.clientsRisksToQuitsorted[0]) 
+
+}
+else 
+{
+   const selectedItemState = sessionStorage.getItem('selectedItem');
     if (selectedItemState) {
       this.selectedItemState.push (JSON.parse(selectedItemState));
     }
     else 
+
    this.selectedItemState.push(this.clientsRisksToQuitsorted[0]) 
   }
+
+
+  sessionStorage.removeItem('clientSurvey');
+}
 },
     
     dialog(val) {
@@ -239,45 +200,23 @@ export default {
     dialogDelete(val) {
       val || this.closeDelete();
     },
-    // selected(val) {
-    //   console.log(val);
-    // },
-  },
 
-  created() {
-    /// this.clientsRisksToQuit=this.changeClientsRisksToQuit.filter((gym)=>gym["gym label"]=== this.gym.activeGym.gym_label)
   },
-
-  //  computed: {
-  //    mapState(){
-  //     return this.$store.state.interventions
-  //    },
-  //    formTitle () {
-  //      return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
-  //    },
-  // },
   methods: {
    
     exportToExcel(){
       var today = new Date();
       this.fileName ="Clients Report - " + String(today)
-      //this.header = "Clients that risks to quit For Date: "+String(today)
       this.header = [
         ["Export Date : " +String(today)],
         ["Clients that risks to quit"],
       ]
       this.worksheet = this.clientsRisksToQuitsorted[0].gym_label
-      //console.log(this.clientsRisksToQuit[0].gym_label)
-      //console.log(String(today))
+
     },
     exportToPDF() {
       const doc = new jsPDF();
       doc.createAnnotation({ type: "csv" });
-    //  let table = document.getElementsByClassName("v-data-table__wrapper");
-  
-      // It can parse html:
-      // <table id="my-table"><!-- ... --></table>
-
       doc.addFileToVFS("meiryo-normal.ttf", meiryo);
       doc.addFont("meiryo-normal.ttf", "meiryo", "normal");
       doc.setFont("meiryo");
@@ -313,17 +252,7 @@ export default {
           else if (typeof cell.row.raw.score === "string")
             cell.cell.styles.fillColor = "rgb(23, 78, 196)";
         },
-        // didDrawPage: (HookData) => {
-        //   console.log(
-        //     "🚀 ~ file: Dashboard.vue ~ line 307 ~ handleTest ~ HookData",
-        //     HookData.table.pageNumber,
-        //     HookData
-        //   );
-
-        //   /// doc.text("Report", HookData.settings.margin.left + 15, 22);
-        //   //console.log("🚀 ~ file: Dashboard.vue ~ line 306 ~ handleTest ~ HookData", HookData)
-        //   ///doc.text(195.89044444444437, 36.86527777777777, "hello world");
-        // },
+       
       });
       const pageCount = doc.internal.getNumberOfPages();
       for (let i = 1; i <= pageCount; i++) {
@@ -357,41 +286,6 @@ export default {
    this.selectedItemState.push(item)
       this.$store.dispatch("changeUserCardActiveRowTableCRQ", item);
     },
-    /*editItem(item) {
-      this.editedIndex = this.interventions.indexOf(item);
-      this.editInterventions = Object.assign({}, item);
-      this.dialog = true;
-    },*/
-
-    /*deleteItem(item) {
-      this.editedIndex = this.interventions.indexOf(item);
-
-      this.interId = this.interventions[this.editedIndex].id;
-      console.log("id", this.interId);
-      console.log("this.editedIndex", this.editedIndex);
-      this.editInterventions = Object.assign({}, item);
-      this.dialogDelete = true;
-    },*/
-
-    /*async deleteItemConfirm() {
-      this.interventions.splice(this.editedIndex, 1);
-      try {
-        const headers = {
-          accept: "application/json",
-          Authorization: "Bearer 24f13e2c51adf19e640fe870df276ceab61629c0",
-        };
-        const response = await this.$http.delete(
-          `http://localhost:8000/api/interventions/${this.interId}/delete/`,
-          { headers }
-        );
-        console.log(response);
-        this.getInterventions();
-      } catch (error) {
-        // log the error
-        console.log(error);
-      }
-      this.closeDelete();
-    },*/
 
     close() {
       this.dialog = false;
@@ -429,14 +323,14 @@ export default {
         : "style-3 ";
     },
     clientSurvey(item){
-      //if(this.$route.name !== "Dashboard")
-      //console.log(this.clientsRisksToQuit[0].membership_id)
       let selected=[]
       selected.push(item)
       this.selectedItemState = selected;
       this.$store.dispatch("changeUserCardActiveRowTableCRQ", item);
       this.$router.push("/surveyForm/"+item.client_id)
       sessionStorage.setItem('selectedItem', JSON.stringify(item));
+      sessionStorage.setItem('clientSurvey', true);
+
     }
   },
 };

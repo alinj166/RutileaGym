@@ -35,7 +35,6 @@ export default {
   },
   methods: {
     handler1(e) {
-      // this.$router.push("./dashboard/"+e.id)
       this.$emit("handler", e.gym_id);
     },
   },

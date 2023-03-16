@@ -120,13 +120,6 @@ export default {
         this.showError = false;
       } else this.showError = true;
 
-      /*try {
-        await this.LogIn(User);
-          this.$router.push("/");
-          this.showError = false
-      } catch (error) {
-         this.showError = true
-      }*/
     },
   },
 };

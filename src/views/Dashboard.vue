@@ -52,7 +52,6 @@
 </template>
 <script>
 import { Bar } from "vue-chartjs/legacy";
-//import { Line } from 'vue-chartjs/legacy'
 
 import LogDisplay from "../views/mainBody/logDisplay";
 import userCard from "./userCard";
@@ -121,45 +120,6 @@ export default {
     },
     options: {
       autocolors: false,
-
-      /*annotation: {
-        annotations: {
-          line1: {
-            type: 'line',
-            yMin: 7,
-            yMax: 7,
-            borderColor: 'rgb(255, 99, 132)',
-            borderWidth: 2,
-            label: {
-              enabled: true,
-              content: 'Limit',
-              rotation: 90
-          },
-        },
-          line2: {
-            type: 'line',
-            yMin: 3.5,
-            yMax: 3.5,
-            borderColor: 'orange',
-            borderWidth: 2,
-          },
-          line3: {
-            type: 'line',
-            yMin: 8,
-            yMax: 8,
-            borderColor: 'rgb(255, 99, 132)',
-            borderWidth: 2,
-          },
-          line4: {
-            type: 'line',
-            yMin: 2,
-            yMax: 2,
-            borderColor: 'orange',
-            borderWidth: 2,
-          },
-
-        }
-      },*/
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
@@ -185,8 +145,6 @@ export default {
     filterName: ["gender", "age"],
     select: "age",
   }),
-
-  //p= "localhost://..static/
   computed: {
     
     clientsRisksToQuitsorted()
@@ -205,7 +163,6 @@ export default {
     clientsRisksToQuit() {
       return this.$store.state.clientsRisksToQuit;
     },
-    //...mapState(['APIDataset', 'APIData']),
     chartOptions() {
       return {
         responsive: true,
@@ -231,7 +188,6 @@ export default {
           legend: {
             labels: {
               color: this.$vuetify.theme.isDark ? "white" : "black", // not 'fontColor:' anymore
-              // fontSize: 18  // not 'fontSize:' anymore
               font: {
                 size: 12, // 'size' now within object 'font {}'
               },
@@ -315,7 +271,6 @@ export default {
         );
     }else 
     {
-        //let t=[this.clientsRisksToQuit, 'gender']
         this.$store.dispatch(
           "changeUserCardActiveRowTableCRQ",
           this.clientsRisksToQuitsorted[0]
@@ -327,7 +282,6 @@ export default {
 
         this.$store.dispatch("changeFilterdClientsRisksToQuit", t);
     
-        ///this.$store.dispatch("changeClientsRisksToQuit",this.$store.state.activeGym.activeGym);
       },
     },
   },
@@ -336,12 +290,9 @@ export default {
 
 <style scoped>
 .logTable {
-  /*max-width: 800px;*/
   width: 800px;
 }
-/*#timeID{
-  width: 50px;
-}*/
+
 
 .inputdate {
   border: 2px solid grey round;
@@ -350,13 +301,6 @@ export default {
 
 input[type="date"]::-webkit-calendar-picker-indicator {
   color-scheme: blue; /*color-scheme: dark;*/
-  /*filter: invert(1);*/
-}
 
-/*@media (prefers-color-scheme: dark) {
-  :root {
-    background-color: #000;
-    color: #fff;
-  }
-}*/
+}
 </style>

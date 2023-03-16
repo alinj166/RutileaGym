@@ -4,7 +4,7 @@
              color="primary"
              text
              v-for="entry in languages" :key="entry.title" @click="changeLocale(entry.language)">
-        <!--<flag :iso="entry.flag" v-bind:squared=false />--> {{entry.title}}
+     {{entry.title}}
       </v-btn>
     </div>
 </template>

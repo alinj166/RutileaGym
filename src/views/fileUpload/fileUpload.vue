@@ -14,11 +14,7 @@
         v-model="file"
         v-on:change="handleFileUpload($event)"
       ></v-file-input>
-      <!--ref="file"
-        type="file" 
-        id="file"-->
-      <!--<input type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>-->
-      <!--<v-spacer></v-spacer>-->
+     
     </v-card-text>
     <v-card-actions>
     <v-dialog
@@ -66,7 +62,6 @@
 
 <script>
 import { Axios } from "../../../src/axios-api";
-//import axios from 'axios'
 export default {
   data() {
     return {
@@ -75,10 +70,6 @@ export default {
       warningTitle: "File Upload Status",
       dialog: false,
     };
-  },
-  props: {
-    //fileInputPlaceholder: String,
-    //fileUploadType: String,
   },
   methods: { 
     submitFile(){
@@ -90,7 +81,6 @@ export default {
             /*
                 Add the form data we need to submit
             */
-            //console.log(this.file)
             formData.append('file', this.file);
 
         /*
@@ -111,23 +101,15 @@ export default {
         }) 
         .catch((error) =>{
 
-          //alert(error.response.data)
           this.warningText = error.response.data
-          //this.warningTitle = 'Error'
-          //console.log(error.response)
-          //console.log(typeof(error.response.data))
 
           
         });
-        //console.log(this.warningText);
       },
 
       /*
         Handles a change on the file upload
       */
-      /*handleFileUpload(){
-        this.file = this.$refs.file.files[0];
-      },*/
       handleFileUpload(event){
         if (this.file !== null && this.file !== "") {
           this.file = event;
